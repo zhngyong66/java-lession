@@ -3,6 +3,9 @@ package com.zeroten.flow;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class firstHomework {
@@ -15,6 +18,47 @@ public class firstHomework {
         System.out.println(b.toCharArray()[0] + "----" + (b.toCharArray()[0]) instanceof String);
         System.out.println(Integer.parseInt(b.substring(0, 1)));
         System.out.println(Integer.parseInt("01" + "02"));
+        System.out.println("------------------------------------------");
+        int n1 = 1;
+        n1 = ++n1;
+//        System.out.println(n1);
+
+        int n2 = 1;
+        n2 = n2++;
+//        System.out.println(n2);
+
+        int A = 1;
+        for (int i = 1; i < 100; i++) {
+            A = A++;
+        }
+        System.out.println(A);
+
+//        int n3 = 1;
+//        n3 = --n3;
+//        System.out.println(n3);
+
+//        int n4 = 1;
+//        n4 = n4--;
+//        System.out.println(n4);
+//
+//        System.out.println("------------------------------------------");
+//        int n = 3;
+//        switch (n) {
+//            case 1:
+//                System.out.println(1);
+//                break;
+//            case 2:
+//                System.out.println(2);
+//                break;
+//            case 3:
+//                System.out.println(3);
+//            case 4:
+//                System.out.println(4);
+//            case 5:
+//                System.out.println(5);
+//            default:
+//                System.out.println(0);
+//        }
     }
 
     //吸血鬼数字是指位数为偶数的数字，可以由一对数字相乘而得到，而这对数字各包含乘积的一半位数的数字，其中从最初的数字中选取的数字可以任意排序。
@@ -117,5 +161,48 @@ public class firstHomework {
         long end = System.nanoTime();
         System.out.println(end);
         System.out.println("方法所用时间：" + (end - start)+"\n");
+    }
+
+    /*
+    * 回文数: 判断一个整数是否是回文数. 回文数是指: 正序(从左到右) 和 倒序(从右到左)读都是一样的整数.
+    * */
+    public boolean isPalindromeNum(int num) {
+        if (num < 0) {
+            return false;
+        }
+        String str = num + "";
+        int[] arr = {0};
+        for (int i = 0; i < str.length(); i++) {
+            arr[i] = Integer.parseInt(str.substring(i, i + 1));
+            arr = Arrays.copyOf(arr, arr.length + 1);
+        }
+        int[] arr2 = Arrays.copyOf(arr, arr.length - 1);
+        int[] reserveArr = reserveArr(arr2);
+        String str2 = "";
+        for (int i = 0; i < reserveArr.length; i++){
+            str2 += reserveArr[i];
+        }
+        int num2 = Integer.parseInt(str2);
+        System.out.println(num2);
+        if (num == num2) {
+            return true;
+        }
+        return false;
+    }
+    public int[] reserveArr(int[] arr) {
+        for (int start = 0, end = arr.length - 1; start < end; start++, end--) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+        }
+        System.out.println(arr);
+        return arr;
+    }
+
+    @Test
+    public void arrReserve() {
+        int num = -121;
+        boolean is = isPalindromeNum(num);
+        System.out.println(is);
     }
 }
